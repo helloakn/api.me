@@ -1,0 +1,24 @@
+FTask-ada-api-production:1
+FTask-ada-api-dashboard-production
+container : container-api-dashboard-production-001
+images : 881862981989.dkr.ecr.ap-southeast-2.amazonaws.com/arimadanapura-image:api-dashboard
+env : arn:aws:s3:::zote-codepipeline/ada/envfiles/production.api.env
+alb : alb-ada-api-produciton
+
+SERVIXE : FService-ADA-API-Dashboard-PRODUCTION
+tg : tg-ada-apiadmin-pro-blue-100
+Path pattern: admin
+
+SERVICE : FService-ADA-WWW-Dashboard-PRODUCTION
+tg : tg-ada-apiwww-pro-blue-100
+FTask-ada-api-www-production
+Path pattern : www
+
+container-ada-api-www-prod-001
+
+docker build -t arimadanapura-image:apidashboard -f docker/dashboard/Dockerfile .
+docker tag arimadanapura-image:apidashboard 881862981989.dkr.ecr.ap-southeast-2.amazonaws.com/arimadanapura-image:apidashboard
+docker push 881862981989.dkr.ecr.ap-southeast-2.amazonaws.com/arimadanapura-image:apidashboard
+
+docker tag arimadanapura-image:api-www 881862981989.dkr.ecr.ap-southeast-2.amazonaws.com/arimadanapura-image:api-www
+docker push 881862981989.dkr.ecr.ap-southeast-2.amazonaws.com/arimadanapura-image:api-www
