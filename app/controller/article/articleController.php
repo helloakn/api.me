@@ -59,7 +59,6 @@ class articleController {
         author_name,author_profile_image
         
 QUERY;
-
         $result =  Database::fetchAllQuery($cmdStringDetail);
         
 
@@ -71,7 +70,7 @@ QUERY;
 /* Start article Detail */
         $cmdStringarticleDetail = <<<QUERY
             SELECT 
-                AD.id,AD.type,AD.title,AD.description,AD.asc_index
+                AD.id,AD.type,AD.title,AD.value,AD.before_description,AD.after_description,AD.asc_index
             FROM Article
             INNER   JOIN ArticleDetail AD 
                     On Article.id = AD.article_id
