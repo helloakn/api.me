@@ -27,6 +27,8 @@ use Model\Article;
 
 class categoryController {
     function detail(Request $request,$parameter){
+        $page_at = $request->get('page_at')?$request->get('page_at'):1;
+        
         $article_link = $parameter->id;
 
         $categories = Category::getList();
@@ -78,14 +80,16 @@ QUERY;
                         )
 
                 GROUP BY Article.id, Article.title, Article.image, Article.intro
+                ORDER BY Article.id DESC
                     
 
 
 QUERY;
 
 //return $cmdStringarticles;
-        $result =  Database::executeQueryPaginate($cmdStringarticles,1,4);
+        $result =  Database::executeQueryPaginate($cmdStringarticles,$page_at==0?1:$page_at,3);
         $articles = [];
+        //return $result;
         foreach($result->data as $k=>$v){
             $v['categories'] = json_decode($v['categories']);
             $articles[] = $v;
@@ -101,7 +105,8 @@ QUERY;
                     "category" => $categories,
                     "articles"    => $articles,
                     
-                )
+                ),
+                "paginate" => $result->paginate
             );
             return $data;
         }
