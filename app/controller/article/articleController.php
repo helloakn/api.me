@@ -106,7 +106,8 @@ QUERY;
                 WHERE
                     Article.deleted_at IS NULL AND
                     AC.deleted_at IS NULL AND
-                    C.deleted_at IS NULL
+                    C.deleted_at IS NULL AND
+                    Article.id != '$item->id'
                 GROUP BY Article.id, Article.title, Article.image, Article.intro
                 ORDER BY Article.id DESC
 QUERY;
