@@ -4,12 +4,12 @@ namespace Model;
 
 use API\Schema\Table;
 
-class Article extends Table {
+class ArticleDetail extends Table {
 
-    public static $tableName = "Article";
+    public static $tableName = "ArticleDetail";
 
-    protected static $columnName = ['id', 'title', 'image', 'intro', 'meta_tag', 'description','author_id'];
-
+    protected static $columnName = ['id', 'article_id', 'type', 'asc_index', 'title','value','before_description','after_description'];
+    //type -> 1 for image, 2 for code, 3 for text, 4 for movie.	
     public static $primaryKeys = ['id'];
 
     protected static $autoIncreaseKeys = ['id'];

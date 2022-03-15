@@ -6,7 +6,7 @@
  * use from : route { localhosts/wwww/home}
  */
 
-namespace Controller\category;
+namespace Controller\WwwSection\category;
 
 use API\providers\Request;
 use API\providers\S3;

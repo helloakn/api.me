@@ -6,7 +6,7 @@
  * use from : route { localhosts/wwww/home}
  */
 
-namespace Controller\homepage;
+namespace Controller\WwwSection\homepage;
 
 use API\providers\Request;
 use API\providers\S3;
@@ -53,7 +53,7 @@ class homepageController {
             AC.deleted_at IS NULL AND
             C.deleted_at IS NULL
         GROUP BY Article.id, Article.title, Article.image, Article.intro
-        ORDER BY Article.id DESC
+        ORDER BY RAND()
 QUERY;
 
         $result =  Database::executeQueryPaginate($cmdStringLatestArticles,1,6);

@@ -6,7 +6,7 @@
  * use from : route { localhosts/wwww/home}
  */
 
-namespace Controller\article;
+namespace Controller\WwwSection\article;
 
 use API\providers\Request;
 use API\providers\S3;
@@ -33,7 +33,7 @@ class articleController {
 
         $cmdStringDetail = <<<QUERY
         SELECT 
-            Article.id, Article.title,Article.link, Article.image, Article.intro,Article.description,Article.created_at,
+            Article.id, Article.title,Article.link, Article.image, Article.intro,Article.meta_tag, Article.description,Article.created_at,
             Author.name as author_name, Author.profile_image as author_profile_image,
             CONCAT('[',
                 GROUP_CONCAT('{',
@@ -91,7 +91,7 @@ QUERY;
 /* Start Related articles */
             $cmdStringLatestArticles = <<<QUERY
                 SELECT 
-                    Article.id, Article.title,Article.link, Article.image, Article.intro,Article.created_at,
+                    Article.id, Article.title,Article.link, Article.image,Article.meta_tag, Article.intro,Article.created_at,
                     CONCAT('[',
                         GROUP_CONCAT('{',
                             '"id":"',C.id,'",'
@@ -109,7 +109,7 @@ QUERY;
                     C.deleted_at IS NULL AND
                     Article.id != '$item->id'
                 GROUP BY Article.id, Article.title, Article.image, Article.intro
-                ORDER BY Article.id DESC
+                ORDER BY RAND()
 QUERY;
 
         $result =  Database::executeQueryPaginate($cmdStringLatestArticles,1,4);
