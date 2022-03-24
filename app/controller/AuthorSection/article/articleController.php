@@ -93,6 +93,7 @@ class articleController {
             $article->image         = $request->get('image');
             $article->intro         = $request->get('intro');
             $article->description   = $request->get('description');
+            $article->meta_tag   = $request->get('meta_tag');
             $article->author_id     = $request->get('author_id');
             //return $article->intro  ;
             $article->save();

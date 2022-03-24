@@ -56,7 +56,8 @@ class homepageController {
         ORDER BY RAND()
 QUERY;
 
-        $result =  Database::executeQueryPaginate($cmdStringLatestArticles,1,6);
+       // $result =  Database::executeQueryPaginate($cmdStringLatestArticles,1,6);
+       $result =  Database::executeQueryPaginate($cmdStringLatestArticles,1,6000);
         $latestArticles = [];
         //return $result;exit;
         foreach($result->data as $k=>$v){
